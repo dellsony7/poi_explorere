@@ -1,36 +1,145 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Here’s a professional and complete `README.md` tailored for your **POI Explorer** project based on your package configuration and project requirements:
 
-## Getting Started
+---
 
-First, run the development server:
+````markdown
+# 🗺️ POI Explorer
+
+A geolocation-based web application built with **Next.js**, **Supabase**, **PGLite**, and **Leaflet** that allows users to search, view, and manage Points of Interest (POIs) with offline support and interactive maps.
+
+![POI Explorer Screenshot](./public/screenshot.png) <!-- Optional image -->
+
+---
+
+## 🚀 Features
+
+- 🔐 **Authentication**: Sign-up, login, and logout with Supabase Auth
+- 🌐 **POI Search**: Search POIs via [OpenStreetMap Nominatim API](https://nominatim.openstreetmap.org/)
+- 🗺️ **Interactive Map**: View POIs on Leaflet with zoom, pan, and marker interactions
+- 📍 **Geospatial Calculations**: Measure distances using the Haversine formula
+- 🎯 **Sorting & Filtering**: Sort POIs by name/distance, filter by radius
+- 📦 **Offline Support**: Local data storage and sync with Supabase using PGLite
+- 💅 **Responsive UI**: Built with Ant Design (AntD)
+- 💥 **Error Handling**: Friendly feedback for network or validation issues
+
+---
+
+## 🧱 Tech Stack
+
+| Tech         | Role                              |
+|--------------|-----------------------------------|
+| Next.js      | Frontend Framework                |
+| Supabase     | Auth & Cloud PostgreSQL Storage   |
+| PGLite       | Local PostgreSQL for Offline Mode |
+| Leaflet      | Interactive Map                   |
+| React        | UI Components                     |
+| Ant Design   | UI Component Library              |
+| Nominatim API| POI Data Source                   |
+
+---
+
+## 🔧 Installation
+
+### 1. Clone the Repository
 
 ```bash
-npm run dev
+git clone https://github.com/your-username/poi-explorer.git
+cd poi-explorer
+````
+
+### 2. Install Dependencies
+
+```bash
+yarn install
 # or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 3. Setup Supabase
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+* Create a [Supabase](https://supabase.com) project.
+* Enable **Email Auth** in `Authentication > Providers`.
+* Create `pois` and `users` tables based on your schema.
+* Get your Supabase URL and public anon key.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 4. Add `.env.local` File
 
-## Learn More
+```env
+NEXT_PUBLIC_SUPABASE_URL=https://your-project.supabase.co
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your-anon-key
+```
 
-To learn more about Next.js, take a look at the following resources:
+### 5. Run the App
+npm run dev
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+The app will be available at [http://localhost:3000](http://localhost:3000).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 🛠 PGLite (Local Offline Support)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+* Used for local storage of POIs and user data.
+* Automatically syncs with Supabase when back online.
+* Enables searching, adding POIs offline.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+> PGLite runs in-browser using `pg-lite`. No extra setup required.
+
+---
+
+## 📡 API Usage – Nominatim
+
+This app uses the OpenStreetMap **Nominatim API** for POI search.
+**Important**: Respect API rate limits and include a user-agent.
+
+```ts
+fetch(`https://nominatim.openstreetmap.org/search?...`, {
+  headers: {
+    'User-Agent': 'poi-explorer-app'
+  }
+})
+```
+
+
+## ✅ Completed Requirements
+
+* [x] Supabase Auth
+* [x] Offline support with PGLite
+* [x] POI search via Nominatim
+* [x] Map rendering via Leaflet
+* [x] Sorting, radius filtering
+* [x] Distance calculation
+* [x] AntD-based UI
+* [x] Error boundaries
+
+---
+
+## 📦 Scripts
+
+```bash
+npm dev       # Run development server
+npm build     # Build for production
+npm start     # Start production server
+npm lint      # Run ESLint
+```
+
+---
+
+## 📄 License
+
+This project is open-source and free to use under the MIT License.
+
+---
+
+## 📬 Contact
+
+Have questions or feedback?
+
+* GitHub: [@your-username](https://github.com/dellsony7)
+
+---
+
+```
+
+Let me know if you'd like this in a downloadable `.md` file or want help customizing the `PGLite` or Supabase schema.
+```
