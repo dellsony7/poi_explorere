@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@ant-design/icons": "^6.0.0",
+    "@ant-design/nextjs-registry": "^1.0.2",
+    "@electric-sql/pglite": "^0.3.1",
     "@supabase/supabase-js": "^2.49.4",
     "antd": "^5.25.1",
     "leaflet": "^1.9.4",
@@ -17,7 +19,8 @@
     "pg-lite": "^0.0.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-leaflet": "^5.0.0"
+    "react-leaflet": "^5.0.0",
+    "sql.js": "^1.13.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

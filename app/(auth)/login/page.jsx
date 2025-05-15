@@ -1,28 +1,10 @@
 'use client'
-import { useEffect } from 'react'
 import { Button, Form, Input, message } from 'antd'
 import { signIn } from '@/lib/auth'
 import Link from 'next/link'
-import { devBypassAuth } from '@/lib/auth';
 
 export default function LoginPage() {
   const [form] = Form.useForm()
-  useEffect(() => {
-    if (process.env.NODE_ENV === 'development') {
-      const devLogin = async () => {
-        try {
-          await devBypassAuth();
-          window.location.href = '/dashboard';
-        } catch (error) {
-          console.error('Dev login failed:', error);
-        }
-      };
-      
-      // Add a 2-second delay to see the login page briefly
-      const timer = setTimeout(devLogin, 2000);
-      return () => clearTimeout(timer);
-    }
-  }, []);
   
   const handleSubmit = async (values) => {
     try {
