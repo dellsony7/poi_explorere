@@ -1,7 +1,6 @@
 'use client'
 import { useState } from 'react'
 import { Input, Button, message } from 'antd'
-import { addPOIToLocalDB } from '@/lib/database'
 import { getCurrentUser } from '@/lib/auth'
 
 export default function SearchBar({ onPOIAdded }) {
@@ -26,7 +25,8 @@ export default function SearchBar({ onPOIAdded }) {
     }
   }
   
-  const addPOI = async (poi) => {
+const addPOI = async (poi) => {
+  try {
     const user = await getCurrentUser()
     const newPOI = {
       id: crypto.randomUUID(),
@@ -36,15 +36,29 @@ export default function SearchBar({ onPOIAdded }) {
       latitude: parseFloat(poi.lat),
       longitude: parseFloat(poi.lon),
       category: poi.type,
-      is_synced: navigator.onLine
+      is_synced: navigator.onLine,
     }
-    
-    await addPOIToLocalDB(newPOI)
+
+    const response = await fetch('/api/add_poi', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(newPOI),
+    })
+
+    if (!response.ok) {
+      const errorData = await response.json()
+      throw new Error(errorData.error || 'Failed to save POI')
+    }
+
     onPOIAdded(newPOI)
     setResults([])
     setQuery('')
     message.success('POI added successfully')
+  } catch (error) {
+    message.error(error.message)
   }
+}
+
   
   return (
     <div style={{ padding: '16px' }}>
